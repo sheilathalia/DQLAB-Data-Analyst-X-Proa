@@ -11,7 +11,9 @@ Repositori ini, saya gunakan untuk menyimpan dan berbagi hasil pembelajaran meng
 # PYTHON
 
 
-- [Introduction](#introduction)
+- [PYTHON for Data Professional Beginner - Part 1
+](#PYTHON for Data Professional Beginner - Part 1
+)
 - [Features](#features)
 - [Feedback](#feedback)
 - [Contributors](#contributors)
