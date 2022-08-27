@@ -1,0 +1,107 @@
+##Fungsi Skalar Matematika - ABS()
+select studentid,firstname,lastname,semester1,semester2,abs(markgrowth) as markgrowth from students;
+
+##Fungsi Skalar Matematika - CEILING()
+select studentid,firstname,lastname,ceiling(semester1) as semester1,ceiling(semester2) as semester2, markgrowth from students;
+
+
+##Fungsi Skalar Matematika - FLOOR()
+select studentid,firstname,lastname,floor(semester1) as semester1,floor(semester2) as semester2, markgrowth from students;
+
+##Fungsi Skalar Matematika - ROUND()
+select studentid,firstname,lastname,round(semester1,1) as semester1,round(semester2,0) as semester2, markgrowth from students;
+
+##Fungsi Skalar Matematika - SQRT( )
+select studentid,firstname,lastname,sqrt(semester1) as semester1,semester2, markgrowth from students;
+
+
+##Tugas Praktek
+select studentid,firstname,lastname,mod(semester1,2) as semester1,semester2,exp(markgrowth) from students;
+
+##Fungsi Text - CONCAT( )
+select studentid,concat(firstname , lastname) as name, 
+semester1,semester2,markgrowth from students;
+
+
+##Fungsi Text - SUBSTRING_INDEX( )
+select studentid,substring_index(email,'@',1) as name from students;
+
+##Fungsi Text - SUBSTR( )
+select studentid,substr(firstname,2,3) as initial from students;
+
+##Fungsi Text - LENGTH( )
+select studentid,firstname,length(firstname) as total_char from students;
+
+##Fungsi Text - REPLACE( )
+select studentid,email,replace(email,'yahoo','gmail') as new_email
+from students ;
+
+##Tugas Praktek
+select studentid,upper(firstname)as firstname ,lower(lastname) as lastname from students;
+
+##Fungsi Aggregate - SUM()
+select sum(semester1) as total_1,sum(semester2) as total_2 from students;
+
+##Fungsi Aggregate - COUNT()
+select count(firstname) as total_student from students;
+
+
+##Fungsi Aggregate - AVG( )
+select aVG(semester1) as avg_1,avg(semester2) as avg_2 from students;
+
+#Tugas Praktek
+select min(semester1)as min1,max(semester1)as max1,min(semester2)as min2,max(semester2)as max2 from students;
+
+
+##Group by Single Column
+select province,count(distinct order_id)as total_order, sum(item_price)as total_price
+from sales_retail_2019
+group by province ;
+
+
+##Group by Multiple Column
+select province,
+brand,count(distinct order_id)as total_order, sum(item_price)as total_price
+from sales_retail_2019
+group by province,brand ;
+
+Fungsi Aggregate dengan Grouping
+select province,count(distinct order_id)as total_unique_order, sum(item_price) as revenue
+from sales_retail_2019
+group by province;
+
+
+##Tugas Praktek
+
+SELECT month(order_date)as order_month,sum(item_price)as total_price,
+CASE  
+ WHEN sum(item_price)>= 30000000000                               THEN 'target achieved'
+WHEN sum(item_price)<= 25000000000 THEN 'less performed'ELSE 'follow up'
+END as remark
+FROM sales_retail_2019
+GROUP BY month(order_date);
+
+##Proyek Pekerjaan - Analisis Penjualan Part 1
+## 1. Total jumlah seluruh penjualan (total/revenue).
+select sum(total)as total
+FROM  tr_penjualan;
+## 2. Total quantity seluruh produk yang terjual.
+SELECT sum(qty)as qty 
+FROM tr_penjualan;
+## 3. Total quantity dan total revenue untuk setiap kode produk.
+select kode_produk, sum(qty) as qty,sum(total)as total
+from tr_penjualan
+group by kode_produk;
+
+##Proyek Pekerjaan - Analisis Penjualan Part 2
+SELECT kode_pelanggan, AVG(total) AS avg_total 
+FROM tr_penjualan
+GROUP BY kode_pelanggan;
+
+SELECT kode_transaksi,kode_pelanggan,no_urut,kode_produk,nama_produk,qty,total,
+CASE  
+    WHEN total > 300000 THEN 'High'
+    WHEN total < 100000 THEN 'Low'   
+    ELSE 'Medium'  
+END as kategori 
+FROM tr_penjualan;
