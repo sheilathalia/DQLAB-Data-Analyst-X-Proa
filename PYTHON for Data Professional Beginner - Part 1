@@ -282,7 +282,7 @@ print(total_pengeluaran)
 print(total_pemasukan)
 
 
-Ekspedisi Pamanku
+##Ekspedisi Pamanku
 # Data
 uang_jalan = 1500000
 jumlah_hari = 31
